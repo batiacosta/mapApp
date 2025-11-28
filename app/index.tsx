@@ -17,14 +17,7 @@ export default function App() {
 
     useEffect(
         () => {
-            const handler = (e: any) => {
-                    console.warn('Unhandled promise rejection:', e?.reason ?? e);
-                };
-                if (typeof window !== 'undefined' && window.addEventListener) {
-                    window.addEventListener('unhandledrejection', handler);
-                    return () => window.removeEventListener('unhandledrejection', handler);
-                }
-        
+    
             navigation.setOptions({
                 headerLeft: () => (
                     <TouchableOpacity onPress={focusMap}>
@@ -37,14 +30,10 @@ export default function App() {
         }, []
     );
 
-    useEffect(() => {
-  
-}, []);
-
     const focusMap = () => {
 
-        //mapRef.current?.animateToRegion(GreenBayStadium);
-        mapRef.current?.animateCamera({ center: INITIAL_REGION, zoom: 10 }, { duration: 2000 });
+        mapRef.current?.animateToRegion(INITIAL_REGION, 1000);
+        //mapRef.current?.animateCamera({ center: INITIAL_REGION, zoom: 1 }, { duration: 2000 });
     };
 
     const onMarketSelected = (marker: any) => {
