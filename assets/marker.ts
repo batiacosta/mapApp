@@ -47,12 +47,12 @@ export const markers = [
         name: "Bizzell Library"
     },
     {
-        // Fred Jones Jr. Museum of Art
-        latitude: 35.2018,
-        longitude: -97.4468,
+        // Sam Noble Oklahoma Museum of Natural History
+        latitude: 35.2050,
+        longitude: -97.4459,
         latitudeDelta: 0.005,
         longitudeDelta: 0.005,
-        name: "Fred Jones Jr. Museum of Art"
+        name: "Sam Noble Museum"
     },
     {
         // Oklahoma Memorial Union (Student Union)

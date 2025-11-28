@@ -17,6 +17,14 @@ export default function App() {
 
     useEffect(
         () => {
+            const handler = (e: any) => {
+                    console.warn('Unhandled promise rejection:', e?.reason ?? e);
+                };
+                if (typeof window !== 'undefined' && window.addEventListener) {
+                    window.addEventListener('unhandledrejection', handler);
+                    return () => window.removeEventListener('unhandledrejection', handler);
+                }
+        
             navigation.setOptions({
                 headerLeft: () => (
                     <TouchableOpacity onPress={focusMap}>
@@ -29,6 +37,10 @@ export default function App() {
         }, []
     );
 
+    useEffect(() => {
+  
+}, []);
+
     const focusMap = () => {
 
         //mapRef.current?.animateToRegion(GreenBayStadium);
@@ -36,7 +48,18 @@ export default function App() {
     };
 
     const onMarketSelected = (marker: any) => {
-        Alert.alert('Market Selected', `You selected ${marker.name}`);
+        try {
+            console.log('Marker pressed:', marker);
+            // Marker can be an object passed from the array or an event payload depending on platform/version.
+            const name =
+                marker && typeof marker === 'object'
+                    ? (marker.name ?? (marker.nativeEvent && marker.nativeEvent.name) ?? JSON.stringify(marker))
+                    : String(marker ?? 'Unknown');
+
+            Alert.alert(`${name}`, `You selected ${name}`);
+        } catch (err) {
+            console.error('Error showing alert for marker press', err);
+        }
     };
 
     const calloutPressed = (ev: any) => {
